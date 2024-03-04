@@ -17,8 +17,10 @@
 
 namespace Tos\Model;
 
+use GuzzleHttp\Psr7\Stream;
 use Tos\Exception\TosClientException;
 use Tos\Helper\Helper;
+use Tos\Helper\StreamReader;
 
 trait InputTranslator
 {
@@ -662,8 +664,7 @@ trait InputTranslator
         $request->key = $key;
         $request->headers = $headers;
         $request->queries = $queries;
-//        $request->body = new StreamReader(new Stream($file), $headers[Constant::HeaderContentLength]);
-        $request->body = $file;
+        $request->body = new StreamReader(new Stream($file), $headers[Constant::HeaderContentLength]);
         return $request;
     }
 
